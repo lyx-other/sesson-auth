@@ -1,0 +1,8 @@
+com/lyx/servide/AuthenticationServiceImpl.class
+com/lyx/init/SpringApplicationInitializer.class
+com/lyx/model/UserDto.class
+com/lyx/servide/AuthenticationService.class
+com/lyx/controller/LoginController.class
+com/lyx/model/AuthenticationRequest.class
+com/lyx/config/ApplicationConfig.class
+com/lyx/config/WebConfig.class
