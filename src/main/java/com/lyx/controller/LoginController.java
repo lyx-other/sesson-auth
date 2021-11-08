@@ -35,6 +35,16 @@ public class LoginController
         return StrUtil.format("{} 登录成功", userDto.getUsername());
     }
 
+    @GetMapping(value = "/logout", produces = "text/plain;charset=utf-8")
+    public String logout(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(true);
+
+        session.invalidate(); // 调用invalidate()方法使用session失效
+
+        return "退出登录成功";
+    }
+
     @GetMapping(value = "/r/r1", produces = "text/plain;charset=utf-8")
     public String r1(HttpSession session)
     {
@@ -48,21 +58,5 @@ public class LoginController
             String username = ((UserDto) user).getUsername();
             return StrUtil.format("{}登录了，可以访问资源.", username);
         }
-    }
-
-    @GetMapping(value = "/test", produces = "text/plain;charset=utf-8")
-    public String test()
-    {
-        return "ð这是测试方法";
-    }
-
-    @GetMapping("/inv")
-    public String fun2(HttpServletRequest request)
-    {
-        HttpSession session = request.getSession(true);
-
-        session.invalidate(); // 调用invalidate()方法使用session失效
-
-        return "失效成功";
     }
 }
