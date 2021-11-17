@@ -1,5 +1,8 @@
 package com.lyx.config;
 
+import com.lyx.interceptor.SimpleAuthenticationInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +28,10 @@ import java.util.List;
 @ComponentScan(basePackages = "com.lyx", includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Controller.class)})
 public class WebConfig implements WebMvcConfigurer
 {
+    @Autowired
+    @Qualifier("simpleAuthenticationInterceptor")
+    private SimpleAuthenticationInterceptor simpleAuthenticationInterceptor;
+
     /**
      * 视图解析器
      */
@@ -67,10 +74,14 @@ public class WebConfig implements WebMvcConfigurer
 
     }
 
+    /**
+     * 添加拦截器
+     * @param interceptorRegistry interceptorRegistry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry)
     {
-
+        interceptorRegistry.addInterceptor(simpleAuthenticationInterceptor).addPathPatterns("/r/**"); // 只有请求 /r/** 的时候这个拦截器才起作用.
     }
 
     @Override

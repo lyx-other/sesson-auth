@@ -23,6 +23,12 @@ public class LoginController
     @Qualifier("authenticationServiceImpl")
     private AuthenticationService authenticationService;
 
+    /**
+     * 登录控制器
+     * @param request 请求报文
+     * @param session session
+     * @return 响应微信
+     */
     @PostMapping(value = "/login", produces = "text/plain;charset=utf-8")
     public String login(AuthenticationRequest request, HttpSession session)
     {
@@ -56,7 +62,22 @@ public class LoginController
         else
         {
             String username = ((UserDto) user).getUsername();
-            return StrUtil.format("{}登录了，可以访问资源.", username);
+            return StrUtil.format("成功访问资源r1.", username);
+        }
+    }
+
+    @GetMapping(value = "/r/r2", produces = "text/plain;charset=utf-8")
+    public String r2(HttpSession session)
+    {
+        Object user = session.getAttribute(UserDto.SESSION_USER_KEY);
+        if (Objects.isNull(user)) // 在session中获取用户，获取不到的话说明用户退出了登录
+        {
+            return "用户退出了登录，不可以访问资源.";
+        }
+        else
+        {
+            String username = ((UserDto) user).getUsername();
+            return StrUtil.format("成功访问资源r2.", username);
         }
     }
 }

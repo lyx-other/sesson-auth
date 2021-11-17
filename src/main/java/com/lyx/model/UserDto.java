@@ -3,6 +3,8 @@ package com.lyx.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 public class UserDto
@@ -18,4 +20,6 @@ public class UserDto
     private String fullname;
 
     private String mobile;
+
+    private Set<String> authorities;
 }
